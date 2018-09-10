@@ -1,0 +1,33 @@
+<table class="mat-elevation-z8">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hair Colour</th>
+      <th>Height</th>
+      <th>Number Of Pats</th>
+      <th>Number Of Feeds</th>
+      <th>Number of walks</th>
+      <th>Is Pet Dressed?</th>
+      <th colspan="4">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pet of pets">
+      <td>{{pet.name}}</td>
+      <td>{{pet.hair_color}}</td>
+      <td class="columnContent">{{pet.height}}</td>
+      <td class="columnContent">{{pet.numberOfPats}}</td>
+      <td class="numberContent">{{pet.numberOfFeeds}}</td>
+      <td class="numberContent">{{pet.numberOfWalks}}</td>
+      <td class="columnContent">{{pet.dressed | transformBoolean}}</td>
+
+      <td><button mat-raised-button color="primary" (click)="pat.emit(pet)">Pat</button></td>
+      <td><button mat-raised-button color="primary" (click)="feed.emit(pet)">Feed</button></td>
+      <td><button mat-raised-button color="primary" (click)="walk.emit(pet)" [disabled]="pet.numberOfWalks>4">Walk</button></td>
+      <td *ngIf="pet.dressed"><button mat-raised-button color="primary" (click)="dress.emit(pet)">UnDress</button></td>
+      <td *ngIf="!pet.dressed"><button mat-raised-button color="primary" (click)="dress.emit(pet)">Dress</button></td>
+      <td><button mat-raised-button color="primary"[disabled]="pet.washCount === 3" (click)="wash.emit(pet)">Wash: {{ +pet.washCount }} </button></td>
+    
+    </tr>
+  </tbody>
+</table>
